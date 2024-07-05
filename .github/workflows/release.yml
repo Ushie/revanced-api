@@ -48,3 +48,16 @@ jobs:
               env:
                   GITHUB_TOKEN: ${{ secrets.REPOSITORY_PUSH_ACCESS }}
               run: npm exec semantic-release
+    clean:
+        runs-on: ubuntu-latest
+        name: Delete old images
+        steps:
+            - uses: snok/container-retention-policy@v3.0.0
+              with:
+                  account: revanced
+                  token: ${{ secrets.GITHUB_TOKEN }}
+                  image-names: "revanced-api"
+                  image-tags: "*"
+                  keep-n-most-recent: 5
+                  cut-off: 3M
+                  dry-run: true
