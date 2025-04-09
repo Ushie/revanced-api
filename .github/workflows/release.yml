@@ -80,8 +80,7 @@ jobs:
       - name: Purge outdated images
         uses: actions/delete-package-versions@v5
         with:
-          package-name: 'revanced-api'
-          package-type: 'container'
+          package-name: revanced-api
+          package-type: container
           min-versions-to-keep: 5
-          delete-only-untagged-versions: 'true'
           token: ${{ secrets.GITHUB_TOKEN }}
