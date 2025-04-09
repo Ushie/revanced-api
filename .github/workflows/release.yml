@@ -78,9 +78,10 @@ jobs:
           webhook_url: ${{ env.PORTAINER_WEBHOOK_URL }}
 
       - name: Purge outdated images
-        uses: actions/delete-package-versions@v5
+        uses: snok/container-retention-policy@v3.0.0
         with:
-          package-name: revanced-api
-          package-type: container
-          min-versions-to-keep: 5
+          account: ${{ github.repository_owner }}
           token: ${{ secrets.GITHUB_TOKEN }}
+          image-names: revanced-api
+          keep-n-most-recent: 5
+          cut-off: 1w
