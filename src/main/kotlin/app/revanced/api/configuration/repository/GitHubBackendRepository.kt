@@ -27,7 +27,7 @@ class GitHubBackendRepository : BackendRepository("https://api.github.com", "htt
         prerelease: Boolean,
     ): BackendRelease {
         val release: GitHubRelease = if (prerelease) {
-            client.get(Releases(owner, repository)).body<List<GitHubRelease>>().first { it.prerelease }
+            client.get(Releases(owner, repository)).body<List<GitHubRelease>>().first()
         } else {
             client.get(Releases.Latest(owner, repository)).body()
         }
@@ -99,10 +99,10 @@ class GitHubBackendRepository : BackendRepository("https://api.github.com", "htt
                 url = user.htmlUrl,
                 bio = user.bio,
                 gpgKeys =
-                BackendMember.GpgKeys(
-                    ids = gpgKeys.map { it.keyId },
-                    url = "https://github.com/${user.login}.gpg",
-                ),
+                    BackendMember.GpgKeys(
+                        ids = gpgKeys.map { it.keyId },
+                        url = "https://github.com/${user.login}.gpg",
+                    ),
             )
         }
     }
@@ -203,7 +203,7 @@ class Organization {
         class Contributors(val owner: String, val repo: String, @SerialName("per_page") val perPage: Int = 100)
 
         @Resource("/repos/{owner}/{repo}/releases")
-        class Releases(val owner: String, val repo: String) {
+        class Releases(val owner: String, val repo: String, @SerialName("per_page") val perPage: Int = 1) {
             @Resource("/repos/{owner}/{repo}/releases/latest")
             class Latest(val owner: String, val repo: String)
         }
