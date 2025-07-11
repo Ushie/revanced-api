@@ -1,3 +1,10 @@
+## [1.6.1](https://github.com/ReVanced/revanced-api/compare/v1.6.0...v1.6.1) (2025-07-11)
+
+
+### Bug Fixes
+
+* Return latest regardless of prerelease parameter for release APIs ([53bd820](https://github.com/ReVanced/revanced-api/commit/53bd82071db165741f8f08e7ec438b45abde4425))
+
 ## [1.6.1-dev.1](https://github.com/ReVanced/revanced-api/compare/v1.6.0...v1.6.1-dev.1) (2025-07-10)
 
 
